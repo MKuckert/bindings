@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -25,21 +25,25 @@
     <IOSDebuggerPort>28434</IOSDebuggerPort>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
-    <MtouchVerbosity></MtouchVerbosity>
-    <MtouchLink></MtouchLink>
+    <MtouchVerbosity>
+    </MtouchVerbosity>
+    <MtouchLink>
+    </MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <MtouchVerbosity></MtouchVerbosity>
+    <MtouchVerbosity>
+    </MtouchVerbosity>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -49,40 +53,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Binding\MvxIosBindingBuilder.cs" />
-    <Compile Include="Binding\MvxIosPropertyBinding.cs" />
-    <Compile Include="Binding\MvxIosPropertyBindingExtensions.cs" />
-    <Compile Include="Binding\Target\MvxBaseUIDatePickerTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxBaseUIViewVisibleTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIActivityIndicatorViewHiddenTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIBarButtonItemTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIButtonTitleTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIControlTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIDatePickerCountdownDurationTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIDatePickerDateTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIDatePickerMinMaxTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIDatePickerTimeTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUILabelTextTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIPageControlCurrentPageTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUISearchBarTextTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUISegmentedControlSelectedSegmentTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUISliderValueTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIStepperValueTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUISwitchOnTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUITextFieldShouldReturnTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUITextFieldTextFocusTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUITextFieldTextTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUITextViewTextTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIViewHiddenTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIViewLayerBorderWidthTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIViewTapTargetBinding.cs" />
-    <Compile Include="Binding\Target\MvxUIViewVisibleTargetBinding.cs" />
-    <Compile Include="Binding\ValueConverters\MvxUnifiedTypesValueConverter.cs" />
-    <Compile Include="Binding\Views\Gestures\MvxBehaviourExtensions.cs" />
-    <Compile Include="Binding\Views\Gestures\MvxGestureRecognizerBehavior.cs" />
-    <Compile Include="Binding\Views\Gestures\MvxSwipeGestureRecognizerBehaviour.cs" />
-    <Compile Include="Binding\Views\Gestures\MvxTapGestureRecognizerBehaviour.cs" />
-    <Compile Include="MvxIosDateTimeExtensions.cs" />
+    <Compile Include="Binding\IosBindingBuilder.cs" />
+    <Compile Include="Binding\IosPropertyBinding.cs" />
+    <Compile Include="Binding\IosPropertyBindingExtensions.cs" />
+    <Compile Include="Binding\Target\BaseUiDatePickerTargetBinding.cs" />
+    <Compile Include="Binding\Target\BaseUiViewVisibleTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiActivityIndicatorViewHiddenTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiBarButtonItemTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiButtonTitleTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiControlTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiDatePickerCountDownDurationTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiDatePickerDateTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiDatePickerMinMaxTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiDatePickerTimeTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiLabelTextTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiPageControlCurrentPageTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiSearchBarTextTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiSegmentedControlSelectedSegmentTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiSliderValueTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiStepperValueTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiSwitchOnTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiTextFieldShouldReturnTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiTextFieldTextFocusTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiTextFieldTextTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiTextViewTextTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiViewHiddenTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiViewLayerBorderWidthTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiViewTapTargetBinding.cs" />
+    <Compile Include="Binding\Target\UiViewVisibleTargetBinding.cs" />
+    <Compile Include="Binding\ValueConverters\UnifiedTypesValueConverter.cs" />
+    <Compile Include="Binding\Views\Gestures\BehaviourExtensions.cs" />
+    <Compile Include="Binding\Views\Gestures\GestureRecognizerBehavior.cs" />
+    <Compile Include="Binding\Views\Gestures\SwipeGestureRecognizerBehaviour.cs" />
+    <Compile Include="Binding\Views\Gestures\TapGestureRecognizerBehaviour.cs" />
+    <Compile Include="IosDateTimeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bindings.Core\Bindings.Core.csproj">

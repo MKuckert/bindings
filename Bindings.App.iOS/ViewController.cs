@@ -1,13 +1,13 @@
 ﻿using System;
-using MvvmCross.Base;
-using MvvmCross.Binding.BindingContext;
+using Bindings.Core.Base;
+using Bindings.Core.Binding.BindingContext;
 using UIKit;
 
-namespace Bindings
+namespace Bindings.App.iOS
 {
-    public partial class ViewController : UIViewController, IMvxDataConsumer, IMvxBindingContextOwner
+    public partial class ViewController : UIViewController, IDataConsumer, IBindingContextOwner
     {
-        public IMvxBindingContext BindingContext { get; set; }
+        public IBindingContext BindingContext { get; set; }
         public object DataContext
         {
             get => BindingContext.DataContext;

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
-using MvvmCross.Base;
+using Bindings.Core.Base;
 
-namespace Bindings
+namespace Bindings.Core
 {
-    public class MainThreadDispatcher : MvxMainThreadAsyncDispatcher
+    public class MainThreadDispatcher : MainThreadAsyncDispatcher
     {
         private readonly SynchronizationContext _synchronizationContext;
         private readonly int _mainThreadId;

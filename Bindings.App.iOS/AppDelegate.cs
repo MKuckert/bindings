@@ -1,17 +1,18 @@
-﻿using Foundation;
-using MvvmCross.Platforms.Ios.Binding;
+﻿using Bindings.iOS.Binding;
+using Foundation;
 using UIKit;
 
-namespace Bindings
+namespace Bindings.App.iOS
 {
     [Register(nameof(AppDelegate))]
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class AppDelegate : UIApplicationDelegate
     {
         public override UIWindow Window { get; set; }
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            new MvxIosBindingBuilder().DoRegistration();
+            new IosBindingBuilder().DoRegistration();
 
             Window = new UIWindow();
             var viewController = UIStoryboard.FromName("Main", null).InstantiateInitialViewController();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Bindings
+namespace Bindings.App.iOS
 {
     public class RelayCommand : ICommand
     {
