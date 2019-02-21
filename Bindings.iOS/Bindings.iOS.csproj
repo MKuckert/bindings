@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{438501D5-C249-453B-97C6-104180F7420A}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Bindings.iOS</RootNamespace>
+    <AssemblyName>Bindings.iOS</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchFastDev>true</MtouchFastDev>
+    <IOSDebuggerPort>28434</IOSDebuggerPort>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <DeviceSpecificBuild>false</DeviceSpecificBuild>
+    <MtouchVerbosity></MtouchVerbosity>
+    <MtouchLink></MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants></DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <MtouchVerbosity></MtouchVerbosity>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Binding\MvxIosBindingBuilder.cs" />
+    <Compile Include="Binding\MvxIosPropertyBinding.cs" />
+    <Compile Include="Binding\MvxIosPropertyBindingExtensions.cs" />
+    <Compile Include="Binding\Target\MvxBaseUIDatePickerTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxBaseUIViewVisibleTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIActivityIndicatorViewHiddenTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIBarButtonItemTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIButtonTitleTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIControlTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIDatePickerCountdownDurationTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIDatePickerDateTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIDatePickerMinMaxTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIDatePickerTimeTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUILabelTextTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIPageControlCurrentPageTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUISearchBarTextTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUISegmentedControlSelectedSegmentTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUISliderValueTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIStepperValueTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUISwitchOnTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUITextFieldShouldReturnTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUITextFieldTextFocusTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUITextFieldTextTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUITextViewTextTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIViewHiddenTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIViewLayerBorderWidthTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIViewTapTargetBinding.cs" />
+    <Compile Include="Binding\Target\MvxUIViewVisibleTargetBinding.cs" />
+    <Compile Include="Binding\ValueConverters\MvxUnifiedTypesValueConverter.cs" />
+    <Compile Include="Binding\Views\Gestures\MvxBehaviourExtensions.cs" />
+    <Compile Include="Binding\Views\Gestures\MvxGestureRecognizerBehavior.cs" />
+    <Compile Include="Binding\Views\Gestures\MvxSwipeGestureRecognizerBehaviour.cs" />
+    <Compile Include="Binding\Views\Gestures\MvxTapGestureRecognizerBehaviour.cs" />
+    <Compile Include="MvxIosDateTimeExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bindings.Core\Bindings.Core.csproj">
+      <Project>{76C2A70D-E1CA-41EB-95B0-B4034D79DD6E}</Project>
+      <Name>Bindings.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>
