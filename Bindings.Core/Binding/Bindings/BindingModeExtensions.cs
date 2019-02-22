@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Bindings.Core.Exeptions;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Bindings
 {
@@ -20,7 +21,7 @@ namespace Bindings.Core.Binding.Bindings
             switch (bindingMode)
             {
                 case BindingMode.Default:
-                    BindingLog.Trace("Mode of default seen for binding - assuming TwoWay");
+                    Log.Trace("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case BindingMode.OneWay:
@@ -41,7 +42,7 @@ namespace Bindings.Core.Binding.Bindings
             switch (bindingMode)
             {
                 case BindingMode.Default:
-                    BindingLog.Trace("Mode of default seen for binding - assuming TwoWay");
+                    Log.Trace("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case BindingMode.OneWay:
@@ -62,7 +63,7 @@ namespace Bindings.Core.Binding.Bindings
             switch (bindingMode)
             {
                 case BindingMode.Default:
-                    BindingLog.Trace("Mode of default seen for binding - assuming TwoWay");
+                    Log.Trace("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case BindingMode.OneWay:

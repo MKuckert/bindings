@@ -17,8 +17,7 @@ namespace Bindings.Core.Base
             if (result == null)
                 return false;
 
-            var s = result as string;
-            if (s != null)
+            if (result is string s)
                 return !string.IsNullOrEmpty(s);
 
             if (result is bool)
@@ -51,8 +50,7 @@ namespace Bindings.Core.Base
                 }
                 else if (propertyType.GetTypeInfo().IsEnum)
                 {
-                    var s = value as string;
-                    safeValue = s != null ? Enum.Parse(propertyType, s, true) : Enum.ToObject(propertyType, value);
+                    safeValue = value is string s ? Enum.Parse(propertyType, s, true) : Enum.ToObject(propertyType, value);
                 }
                 else if (propertyType.GetTypeInfo().IsValueType)
                 {

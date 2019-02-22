@@ -4,7 +4,7 @@
 
 using System;
 using System.Globalization;
-using Bindings.Core.Binding;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Converters
 {
@@ -33,7 +33,7 @@ namespace Bindings.Core.Converters
             }
             catch (Exception e)
             {
-                BindingLog.Error($"Failed to Convert from {typeof(TFrom)} to {typeof(TTo)} with Exception: {e}");
+                Log.Error($"Failed to Convert from {typeof(TFrom)} to {typeof(TTo)} with Exception: {e}");
                 return BindingConstant.UnsetValue;
             }
         }
@@ -51,7 +51,7 @@ namespace Bindings.Core.Converters
             }
             catch (Exception e)
             {
-                BindingLog.Error($"Failed to ConvertBack from {typeof(TTo)} to {typeof(TFrom)} with Exception: {e}");
+                Log.Error($"Failed to ConvertBack from {typeof(TTo)} to {typeof(TFrom)} with Exception: {e}");
                 return BindingConstant.UnsetValue;
             }
         }
@@ -73,7 +73,7 @@ namespace Bindings.Core.Converters
             }
             catch (Exception e)
             {
-                BindingLog.Error($"Failed to Convert from {typeof(TFrom)} with Exception: {e}");
+                Log.Error($"Failed to Convert from {typeof(TFrom)} with Exception: {e}");
                 return BindingConstant.UnsetValue;
             }
         }
@@ -91,7 +91,7 @@ namespace Bindings.Core.Converters
             }
             catch (Exception e)
             {
-                BindingLog.Error($"Failed to ConvertBack to {typeof(TFrom)} with Exception: {e}");
+                Log.Error($"Failed to ConvertBack to {typeof(TFrom)} with Exception: {e}");
                 return BindingConstant.UnsetValue;
             }
         }

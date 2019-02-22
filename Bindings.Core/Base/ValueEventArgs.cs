@@ -6,14 +6,14 @@ using System;
 
 namespace Bindings.Core.Base
 {
-    public class ValueEventArgs<T>
+    public abstract class ValueEventArgs<T>
         : EventArgs
     {
-        public ValueEventArgs(T value)
+        protected ValueEventArgs(T value)
         {
             Value = value;
         }
 
-        public T Value { get; private set; }
+        public T Value { get; }
     }
 }

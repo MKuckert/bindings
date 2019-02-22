@@ -7,6 +7,7 @@ using System.Linq;
 using Bindings.Core.Binding.Bindings.SourceSteps;
 using Bindings.Core.Binding.Extensions;
 using Bindings.Core.Converters;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Combiners
 {
@@ -25,7 +26,7 @@ namespace Bindings.Core.Binding.Combiners
                     return TryEvaluateif (list[0], list[1], list[2], out value);
 
                 default:
-                    BindingLog.Warning("Unexpected substep count of {0} in 'If' ValueCombiner", list.Count);
+                    Log.Warning("Unexpected substep count of {0} in 'If' ValueCombiner", list.Count);
                     return base.TryGetValue(list, out value);
             }
         }

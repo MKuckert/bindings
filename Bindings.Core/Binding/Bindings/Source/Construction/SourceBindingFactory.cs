@@ -8,6 +8,7 @@ using Bindings.Core.Binding.Parse.PropertyPath;
 using Bindings.Core.Binding.Parse.PropertyPath.PropertyTokens;
 using Bindings.Core.Exeptions;
 using Bindings.Core.IoC;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Bindings.Source.Construction
 {
@@ -58,7 +59,7 @@ namespace Bindings.Core.Binding.Bindings.Source.Construction
 
             if (source != null)
             {
-                BindingLog.Warning(
+                Log.Warning(
                     "Unable to bind: source property source not found {0} on {1}"
                     , currentToken
                     , source.GetType().Name);

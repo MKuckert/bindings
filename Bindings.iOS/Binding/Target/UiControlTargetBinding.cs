@@ -4,8 +4,10 @@
 
 using System;
 using System.Windows.Input;
+using Bindings.Core;
 using Bindings.Core.Binding;
 using Bindings.Core.Binding.Bindings.Target;
+using Bindings.Core.Logging;
 using Bindings.Core.WeakSubscription;
 using UIKit;
 
@@ -29,7 +31,7 @@ namespace Bindings.iOS.Binding.Target
 
             if (control == null)
             {
-                BindingLog.Error( "Error - UIControl is null in MvxUIControlTargetBinding");
+                Log.Error( $"{nameof(UIControl)} is null in {GetType().Name}");
             }
             else
             {
@@ -133,7 +135,7 @@ namespace Bindings.iOS.Binding.Target
                     _controlEventSubscription = control.WeakSubscribe(nameof(control.AllEvents), ControlEvent);
                     break;
                 default:
-                    BindingLog.Error( "Error - Invalid controlEvent in MvxUIControlTargetBinding");
+                    Log.Error( "Error - Invalid controlEvent in MvxUIControlTargetBinding");
                     break;
             }
         }
@@ -158,7 +160,7 @@ namespace Bindings.iOS.Binding.Target
                     _controlEventSubscription?.Dispose();
                     break;
                 default:
-                    BindingLog.Error( "Error - Invalid controlEvent in MvxUIControlTargetBinding");
+                    Log.Error( "Error - Invalid controlEvent in MvxUIControlTargetBinding");
                     break;
             }
         }

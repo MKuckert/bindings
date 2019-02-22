@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Bindings.Target.Construction
 {
@@ -33,7 +34,7 @@ namespace Bindings.Core.Binding.Bindings.Target.Construction
             var castTarget = target as TTarget;
             if (castTarget == null)
             {
-                BindingLog.Error("Passed an invalid target for MvxCustomBindingFactory");
+                Log.Error("Passed an invalid target for MvxCustomBindingFactory");
                 return null;
             }
 

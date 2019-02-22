@@ -5,6 +5,7 @@
 using System;
 using System.Globalization;
 using Bindings.Core.Converters;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Bindings.SourceSteps
 {
@@ -99,7 +100,7 @@ namespace Bindings.Core.Binding.Bindings.SourceSteps
             {
                 // pokemon exception - force the use of Fallback in this case
                 // we expect this exception to occur sometimes - so only "Diagnostic" level logging here
-                BindingLog.Trace(
+                Log.Trace(
                     "Problem seen during binding execution for {0} - problem {1}",
                     Description.ToString(),
                     exception);

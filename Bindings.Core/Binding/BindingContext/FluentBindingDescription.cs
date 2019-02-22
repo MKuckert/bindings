@@ -11,6 +11,7 @@ using Bindings.Core.Binding.Combiners;
 using Bindings.Core.Binding.ValueConverters;
 using Bindings.Core.Converters;
 using Bindings.Core.IoC;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.BindingContext
 {
@@ -148,7 +149,7 @@ namespace Bindings.Core.Binding.BindingContext
 
             if (newBindingDescription.Count > 1)
             {
-                BindingLog.Warning("More than one description found - only first will be used in {0}", bindingDescription);
+                Log.Warning("More than one description found - only first will be used in {0}", bindingDescription);
             }
 
             return FullyDescribed(newBindingDescription.FirstOrDefault());
@@ -283,7 +284,7 @@ namespace Bindings.Core.Binding.BindingContext
 
             if (newBindingDescription.Count > 1)
             {
-                BindingLog.Warning("More than one description found - only first will be used in {0}", bindingDescription);
+                Log.Warning("More than one description found - only first will be used in {0}", bindingDescription);
             }
 
             return FullyDescribed(newBindingDescription.FirstOrDefault());

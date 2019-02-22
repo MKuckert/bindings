@@ -2,25 +2,33 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Diagnostics;
+using System;
 
-namespace Bindings.Core.Binding
+namespace Bindings.Core.Logging
 {
-    public static class BindingLog
+    public static class Log
     {
+        private static ILogger _logger = new DebugWriteLineLogger();
+
+        public static ILogger Logger
+        {
+            get => _logger;
+            set => _logger = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
         public static void Trace(string message, params object[] args)
         {
-            Debug.WriteLine("Trace " + string.Format(message, args));
+            Logger.Trace(message, args);
         }
 
         public static void Warning(string message, params object[] args)
         {
-            Debug.WriteLine("Warn " + string.Format(message, args));
+            Logger.Warning(message, args);
         }
 
         public static void Error(string message, params object[] args)
         {
-            Debug.WriteLine("Error " + string.Format(message, args));
+            Logger.Error(message, args);
         }
     }
 }

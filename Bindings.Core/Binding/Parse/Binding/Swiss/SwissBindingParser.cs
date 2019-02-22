@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bindings.Core.Exeptions;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Parse.Binding.Swiss
 {
@@ -28,7 +29,7 @@ namespace Bindings.Core.Binding.Parse.Binding.Swiss
             ParseEquals(block);
             var converter = ReadTargetPropertyName();
             if (!string.IsNullOrEmpty(description.Converter))
-                BindingLog.Warning("Overwriting existing Converter with {0}", converter);
+                Log.Warning("Overwriting existing Converter with {0}", converter);
             description.Converter = converter;
         }
 
@@ -36,7 +37,7 @@ namespace Bindings.Core.Binding.Parse.Binding.Swiss
         {
             ParseEquals(block);
             if (description.ConverterParameter != null)
-                BindingLog.Warning("Overwriting existing ConverterParameter");
+                Log.Warning("Overwriting existing ConverterParameter");
             description.ConverterParameter = ReadValue();
         }
 
@@ -53,7 +54,7 @@ namespace Bindings.Core.Binding.Parse.Binding.Swiss
             {
                 ParseEquals(block);
                 if (!string.IsNullOrEmpty(description.Converter))
-                    BindingLog.Warning("Overwriting existing Converter with CommandParameter");
+                    Log.Warning("Overwriting existing Converter with CommandParameter");
                 description.Converter = "CommandParameter";
                 description.ConverterParameter = ReadValue();
             }
@@ -63,7 +64,7 @@ namespace Bindings.Core.Binding.Parse.Binding.Swiss
         {
             ParseEquals(block);
             if (description.FallbackValue != null)
-                BindingLog.Warning("Overwriting existing FallbackValue");
+                Log.Warning("Overwriting existing FallbackValue");
             description.FallbackValue = ReadValue();
         }
 

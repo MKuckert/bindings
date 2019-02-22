@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Bindings.Target.Construction
 {
@@ -37,7 +38,7 @@ namespace Bindings.Core.Binding.Bindings.Target.Construction
             var targetBinding = targetBindingCandidate as ITargetBinding;
             if (targetBinding == null)
             {
-                BindingLog.Warning("The TargetBinding created did not support IMvxTargetBinding");
+                Log.Warning("The TargetBinding created did not support IMvxTargetBinding");
                 var disposable = targetBindingCandidate as IDisposable;
                 disposable?.Dispose();
             }

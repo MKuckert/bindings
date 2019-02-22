@@ -6,6 +6,7 @@ using System;
 using System.Reflection;
 using Bindings.Core.Binding.Extensions;
 using Bindings.Core.Converters;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Bindings.Source.Leaf
 {
@@ -32,7 +33,7 @@ namespace Bindings.Core.Binding.Bindings.Source.Leaf
 
             if (!PropertyInfo.CanRead)
             {
-                BindingLog.Error("GetValue ignored in binding - target property is writeonly");
+                Log.Error("GetValue ignored in binding - target property is writeonly");
                 return BindingConstant.UnsetValue;
             }
 
@@ -54,13 +55,13 @@ namespace Bindings.Core.Binding.Bindings.Source.Leaf
         {
             if (PropertyInfo == null)
             {
-                BindingLog.Warning("SetValue ignored in binding - source property {0} is missing", PropertyName);
+                Log.Warning("SetValue ignored in binding - source property {0} is missing", PropertyName);
                 return;
             }
 
             if (!PropertyInfo.CanWrite)
             {
-                BindingLog.Warning("SetValue ignored in binding - target property is readonly");
+                Log.Warning("SetValue ignored in binding - target property is readonly");
                 return;
             }
 
@@ -77,7 +78,7 @@ namespace Bindings.Core.Binding.Bindings.Source.Leaf
             }
             catch (Exception exception)
             {
-                BindingLog.Error("SetValue failed with exception - " + exception);
+                Log.Error("SetValue failed with exception - " + exception);
             }
         }
     }

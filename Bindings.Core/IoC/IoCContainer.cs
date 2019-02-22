@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Bindings.Core.Binding;
 using Bindings.Core.Exeptions;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.IoC
 {
@@ -18,7 +18,6 @@ namespace Bindings.Core.IoC
         private readonly Dictionary<Type, IResolver> _resolvers = new Dictionary<Type, IResolver>();
         // ReSharper disable once CollectionNeverQueried.Local
         private readonly Dictionary<Type, bool> _circularTypeDetection = new Dictionary<Type, bool>();
-        private readonly IPropertyInjector _propertyInjector;
         private readonly IIoCProvider _parentProvider;
 
         private IIocOptions Options { get; }
@@ -26,14 +25,6 @@ namespace Bindings.Core.IoC
         public IoCContainer(IIocOptions options, IIoCProvider parentProvider = null)
         {
             Options = options ?? new IocOptions();
-            if (Options.PropertyInjectorType != null)
-            {
-                _propertyInjector = Activator.CreateInstance(Options.PropertyInjectorType) as IPropertyInjector;
-            }
-            if (_propertyInjector != null)
-            {
-                InternalSetResolver(typeof(IPropertyInjector), new SingletonResolver(_propertyInjector));
-            }
             if (parentProvider != null)
             {
                 _parentProvider = parentProvider;
@@ -217,22 +208,7 @@ namespace Bindings.Core.IoC
             {
                 throw new BindingIoCResolveException(invocation, "Failed to construct {0}", type.Name);
             }
-
-            try
-            {
-                InjectProperties(toReturn);
-            }
-            catch (Exception)
-            {
-                if (!Options.CheckDisposeIfPropertyInjectionFails)
-                    throw;
-
-                if (toReturn is IDisposable disposable)
-                {
-                    disposable.Dispose();
-                }
-                throw;
-            }
+            
             return toReturn;
         }
 
@@ -325,7 +301,7 @@ namespace Bindings.Core.IoC
                     // the item already exists in the lookup table
                     // - this is "game over" for the IoC lookup
                     // - see https://github.com/MvvmCross/MvvmCross/issues/553
-                    BindingLog.Error("IoC circular reference detected - cannot currently resolve {0}", type.Name);
+                    Log.Error("IoC circular reference detected - cannot currently resolve {0}", type.Name);
                     resolved = type.CreateDefault();
                     return false;
                 }
@@ -363,11 +339,6 @@ namespace Bindings.Core.IoC
             {
                 _resolvers[interfaceType] = resolver;
             }
-        }
-
-        protected virtual void InjectProperties(object toReturn)
-        {
-            _propertyInjector?.Inject(toReturn, Options.PropertyInjectorOptions);
         }
 
         protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor, IDictionary<string, object> arguments)

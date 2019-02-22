@@ -3,28 +3,22 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Reflection;
 using System.Threading.Tasks;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Base
 {
-    public abstract class MainThreadAsyncDispatcher : MainThreadDispatcher, IMainThreadAsyncDispatcher
+    public abstract class MainThreadAsyncDispatcher  : Singleton<IMainThreadAsyncDispatcher>, IMainThreadAsyncDispatcher
     {
+        protected abstract bool RequestMainThreadAction(Action action, bool maskExceptions = true);
+        
         public Task ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true)
         {
-            var asyncAction = new Func<Task>(() =>
+            var completion = new TaskCompletionSource<bool>();
+            var syncAction = new Action(() =>
             {
                 action();
-                return Task.CompletedTask;
-            });
-            return ExecuteOnMainThreadAsync(asyncAction, maskExceptions);
-        }
-
-        public async Task ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true)
-        {
-            var completion = new TaskCompletionSource<bool>();
-            var syncAction = new Action(async () =>
-            {
-                await action();
                 completion.SetResult(true);
             });
             RequestMainThreadAction(syncAction, maskExceptions);
@@ -32,14 +26,36 @@ namespace Bindings.Core.Base
             // If we're already on main thread, then the action will
             // have already completed at this point, so can just return
             if (completion.Task.IsCompleted)
-                return;
+                return Task.CompletedTask;
 
             // Make sure we don't introduce weird locking issues  
             // blocking on the completion source by jumping onto
             // a new thread to wait
-            await Task.Run(async () => await completion.Task);
+            return completion.Task;
         }
 
-        public abstract override bool IsOnMainThread { get; }
+        protected static void ExceptionMaskedAction(Action action, bool maskExceptions)
+        {
+            try
+            {
+                action();
+            }
+            catch (TargetInvocationException exception)
+            {
+                Log.Trace("Exception throw when invoking action via dispatcher", exception);
+                if (maskExceptions)
+                    Log.Warning("TargetInvocateException masked " + exception.InnerException);
+                else
+                    throw;
+            }
+            catch (Exception exception)
+            {
+                Log.Trace("Exception throw when invoking action via dispatcher", exception);
+                if (maskExceptions)
+                    Log.Warning("Exception masked " + exception);
+                else
+                    throw;
+            }
+        }
     }
 }

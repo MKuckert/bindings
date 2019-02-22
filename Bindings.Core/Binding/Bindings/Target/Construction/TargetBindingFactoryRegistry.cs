@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Bindings.Target.Construction
 {
@@ -30,7 +31,7 @@ namespace Bindings.Core.Binding.Bindings.Target.Construction
         {
             if (string.IsNullOrEmpty(targetName))
             {
-                BindingLog.Error("Empty binding target passed to MvxTargetBindingFactoryRegistry");
+                Log.Error("Empty binding target passed to MvxTargetBindingFactoryRegistry");
                 binding = null;
                 return false;
             }

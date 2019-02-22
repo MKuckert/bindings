@@ -4,8 +4,10 @@
 
 using System;
 using System.Reflection;
+using Bindings.Core;
 using Bindings.Core.Binding;
 using Bindings.Core.Binding.Bindings.Target;
+using Bindings.Core.Logging;
 using Bindings.Core.WeakSubscription;
 using Foundation;
 using UIKit;
@@ -40,7 +42,7 @@ namespace Bindings.iOS.Binding.Target
             var datePicker = View;
             if (datePicker == null)
             {
-                BindingLog.Error( "Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
+                Log.Error( $"{nameof(UIDatePicker)} is null in {GetType().Name}");
             }
             // Only listen for value changes if we are binding against one of the value-derived properties.
             else if (TargetPropertyInfo.Name == nameof(UIDatePicker.Date) || TargetPropertyInfo.Name == nameof(UIDatePicker.CountDownDuration))

@@ -1,4 +1,5 @@
-﻿using Bindings.iOS.Binding;
+﻿using Bindings.Core.Binding;
+using Bindings.iOS.Binding;
 using Foundation;
 using UIKit;
 
@@ -12,7 +13,7 @@ namespace Bindings.App.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            new IosBindingBuilder().DoRegistration();
+            BindingBuilder.Create<IosBindingBuilder>();
 
             Window = new UIWindow();
             var viewController = UIStoryboard.FromName("Main", null).InstantiateInitialViewController();

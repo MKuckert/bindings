@@ -10,6 +10,7 @@ using Bindings.Core.Binding.Bindings.Target;
 using Bindings.Core.Binding.Bindings.Target.Construction;
 using Bindings.Core.Converters;
 using Bindings.Core.IoC;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Bindings
 {
@@ -117,7 +118,7 @@ namespace Bindings.Core.Binding.Bindings
                 }
                 catch (Exception exception)
                 {
-                    BindingLog.Trace("Exception masked in UpdateTargetOnBind {0}", exception);
+                    Log.Trace("Exception masked in UpdateTargetOnBind {0}", exception);
                 }
             }
         }
@@ -146,7 +147,7 @@ namespace Bindings.Core.Binding.Bindings
 
             if (_targetBinding == null)
             {
-                BindingLog.Warning("Failed to create target binding for {0}", _bindingDescription.ToString());
+                Log.Warning("Failed to create target binding for {0}", _bindingDescription.ToString());
                 _targetBinding = new NullTargetBinding();
             }
 
@@ -182,7 +183,7 @@ namespace Bindings.Core.Binding.Bindings
                 }
                 catch (Exception exception)
                 {
-                    BindingLog.Error(
+                    Log.Error(
                         "Problem seen during binding execution for {0} - problem {1}",
                         _bindingDescription.ToString(),
                         exception);
@@ -204,7 +205,7 @@ namespace Bindings.Core.Binding.Bindings
             }
             catch (Exception exception)
             {
-                BindingLog.Error(
+                Log.Error(
                     "Problem seen during binding execution for {0} - problem {1}",
                     _bindingDescription.ToString(),
                     exception);

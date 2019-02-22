@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using Bindings.Core.Base;
 using Bindings.Core.Exeptions;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Parse.Binding
 {
@@ -26,7 +27,7 @@ namespace Bindings.Core.Binding.Parse.Binding
             }
             catch (Exception exception)
             {
-                BindingLog.Error("Problem parsing binding {0}", exception);
+                Log.Error("Problem parsing binding {0}", exception);
                 requestedDescription = null;
                 return false;
             }
@@ -52,7 +53,7 @@ namespace Bindings.Core.Binding.Parse.Binding
             }
             catch (Exception exception)
             {
-                BindingLog.Error("Problem parsing binding {0}", exception);
+                Log.Error("Problem parsing binding {0}", exception);
                 requestedBindings = null;
                 return false;
             }

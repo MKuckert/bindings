@@ -8,6 +8,7 @@ using System.Reflection;
 using Bindings.Core.Binding.Bindings.Source.Construction;
 using Bindings.Core.Binding.Parse.PropertyPath.PropertyTokens;
 using Bindings.Core.Converters;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Bindings.Source.Chained
 {
@@ -107,7 +108,7 @@ namespace Bindings.Core.Binding.Bindings.Source.Chained
         {
             if (_currentChildBinding == null)
             {
-                BindingLog.Warning("SetValue ignored in binding - target property path missing");
+                Log.Warning("SetValue ignored in binding - target property path missing");
                 return;
             }
 

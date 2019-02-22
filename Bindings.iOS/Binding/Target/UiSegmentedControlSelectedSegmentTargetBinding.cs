@@ -4,8 +4,10 @@
 
 using System;
 using System.Reflection;
+using Bindings.Core;
 using Bindings.Core.Binding;
 using Bindings.Core.Binding.Bindings.Target;
+using Bindings.Core.Logging;
 using Bindings.Core.WeakSubscription;
 using UIKit;
 
@@ -27,7 +29,7 @@ namespace Bindings.iOS.Binding.Target
             var segmentedControl = View;
             if (segmentedControl == null)
             {
-                BindingLog.Error( "Error - UISegmentedControl is null in MvxUISegmentedControlSelectedSegmentTargetBinding");
+                Log.Error( "Error - UISegmentedControl is null in MvxUISegmentedControlSelectedSegmentTargetBinding");
                 return;
             }
 

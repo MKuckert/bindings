@@ -3,8 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Bindings.Core;
 using Bindings.Core.Binding;
 using Bindings.Core.Binding.Bindings.Target;
+using Bindings.Core.Logging;
 using UIKit;
 
 namespace Bindings.iOS.Binding.Target
@@ -20,8 +22,7 @@ namespace Bindings.iOS.Binding.Target
         {
             if (target == null)
             {
-                BindingLog.Error(
-                                    "Error - UIActivityIndicatorView is null in MvxUIActivityIndicatorViewHiddenTargetBinding");
+                Log.Error($"{nameof(UIActivityIndicatorView)} is null in {GetType().Name}");
             }
         }
 

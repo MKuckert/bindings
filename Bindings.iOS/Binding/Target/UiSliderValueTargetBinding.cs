@@ -4,8 +4,10 @@
 
 using System;
 using System.Reflection;
+using Bindings.Core;
 using Bindings.Core.Binding;
 using Bindings.Core.Binding.Bindings.Target;
+using Bindings.Core.Logging;
 using Bindings.Core.WeakSubscription;
 using UIKit;
 
@@ -43,7 +45,7 @@ namespace Bindings.iOS.Binding.Target
             var slider = View;
             if (slider == null)
             {
-                BindingLog.Error( "Error - UISlider is null in MvxUISliderValueTargetBinding");
+                Log.Error( "Error - UISlider is null in MvxUISliderValueTargetBinding");
                 return;
             }
 

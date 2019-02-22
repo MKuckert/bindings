@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Bindings.Core;
 using Bindings.Core.Binding;
 using Bindings.Core.Binding.Bindings.Target;
 using Bindings.Core.Binding.Extensions;
+using Bindings.Core.Logging;
 using Bindings.Core.WeakSubscription;
 using UIKit;
 
@@ -38,7 +40,7 @@ namespace Bindings.iOS.Binding.Target
             var target = View;
             if (target == null)
             {
-                BindingLog.Error(
+                Log.Error(
                                       "Error - UITextField is null in MvxUITextFieldTextTargetBinding");
                 return;
             }

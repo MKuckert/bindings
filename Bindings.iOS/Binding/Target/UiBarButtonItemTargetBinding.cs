@@ -4,8 +4,10 @@
 
 using System;
 using System.Windows.Input;
+using Bindings.Core;
 using Bindings.Core.Binding;
 using Bindings.Core.Binding.Bindings.Target;
+using Bindings.Core.Logging;
 using Bindings.Core.WeakSubscription;
 using UIKit;
 
@@ -25,7 +27,7 @@ namespace Bindings.iOS.Binding.Target
         {
             if (control == null)
             {
-                BindingLog.Error( "Error - UIControl is null in MvxUIBarButtonItemTargetBinding");
+                Log.Error( $"{nameof(UIControl)} is null in {GetType().Name}");
             }
             else
             {

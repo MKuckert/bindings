@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using Bindings.Core.Logging;
 using Bindings.Core.WeakSubscription;
 
 namespace Bindings.Core.Binding.Bindings.Source
@@ -24,7 +25,7 @@ namespace Bindings.Core.Binding.Bindings.Source
 
             if (Source == null)
             {
-                BindingLog.Trace(
+                Log.Trace(
                     "Unable to bind to source as it's null"
                     , _propertyName);
                 return;

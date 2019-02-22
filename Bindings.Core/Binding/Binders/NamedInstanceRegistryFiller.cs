@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using Bindings.Core.Base;
 using Bindings.Core.IoC;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Binders
 {
@@ -84,7 +85,7 @@ namespace Bindings.Core.Binding.Binders
                     if (pair.Type.ContainsGenericParameters) continue;
 
                     var converter = Activator.CreateInstance(pair.Type) as T;
-                    BindingLog.Trace("Registering value converter {0}:{1}", pair.Name, pair.Type.Name);
+                    Log.Trace("Registering value converter {0}:{1}", pair.Name, pair.Type.Name);
                     registry.AddOrOverwrite(pair.Name, converter);
                 }
                 catch (Exception)

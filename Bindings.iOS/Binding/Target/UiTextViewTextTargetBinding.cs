@@ -3,8 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Bindings.Core;
 using Bindings.Core.Binding;
 using Bindings.Core.Binding.Bindings.Target;
+using Bindings.Core.Logging;
 using Bindings.Core.WeakSubscription;
 using UIKit;
 
@@ -37,7 +39,7 @@ namespace Bindings.iOS.Binding.Target
             var target = View;
             if (target == null)
             {
-                BindingLog.Error(
+                Log.Error(
                                       "Error - UITextView is null in MvxUITextViewTextTargetBinding");
                 return;
             }
@@ -45,7 +47,7 @@ namespace Bindings.iOS.Binding.Target
 			var textStorage = target.LayoutManager?.TextStorage;
 			if (textStorage == null)
 			{ 
-			    BindingLog.Error(
+			    Log.Error(
 						  "Error - NSTextStorage of UITextView is null in MvxUITextViewTextTargetBinding");
 				return;
 			}

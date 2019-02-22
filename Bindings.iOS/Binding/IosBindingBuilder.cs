@@ -2,12 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using Bindings.Core.Binding;
 using Bindings.Core.Binding.Binders;
 using Bindings.Core.Binding.BindingContext;
 using Bindings.Core.Binding.Bindings.Target.Construction;
-using Bindings.Core.Converters;
 using Bindings.iOS.Binding.Target;
 using Bindings.iOS.Binding.ValueConverters;
 using UIKit;
@@ -17,24 +15,7 @@ namespace Bindings.iOS.Binding
     public class IosBindingBuilder
         : BindingBuilder
     {
-        private readonly Action<ITargetBindingFactoryRegistry> _fillRegistryAction;
-        private readonly Action<IValueConverterRegistry> _fillValueConvertersAction;
-        private readonly Action<IAutoValueConverters> _fillAutoValueConvertersAction;
-        private readonly Action<IBindingNameRegistry> _fillBindingNamesAction;
-        private readonly UnifiedTypesValueConverter _unifiedValueTypesConverter;
-
-        public IosBindingBuilder(Action<ITargetBindingFactoryRegistry> fillRegistryAction = null,
-                                    Action<IValueConverterRegistry> fillValueConvertersAction = null,
-                                    Action<IAutoValueConverters> fillAutoValueConvertersAction = null,
-                                    Action<IBindingNameRegistry> fillBindingNamesAction = null)
-        {
-            _fillRegistryAction = fillRegistryAction;
-            _fillValueConvertersAction = fillValueConvertersAction;
-            _fillAutoValueConvertersAction = fillAutoValueConvertersAction;
-            _fillBindingNamesAction = fillBindingNamesAction;
-
-            _unifiedValueTypesConverter = new UnifiedTypesValueConverter();
-        }
+        private readonly UnifiedTypesValueConverter _unifiedValueTypesConverter = new UnifiedTypesValueConverter();
 
         protected override void FillTargetFactories(ITargetBindingFactoryRegistry registry)
         {
@@ -212,15 +193,6 @@ namespace Bindings.iOS.Binding
             registry.RegisterCustomBindingFactory<UIBarButtonItem>(
                 IosPropertyBinding.UIBarButtonItem_Clicked,
                 view => new UiBarButtonItemTargetBinding(view));
-
-            _fillRegistryAction?.Invoke(registry);
-        }
-
-        protected override void FillValueConverters(IValueConverterRegistry registry)
-        {
-            base.FillValueConverters(registry);
-
-            _fillValueConvertersAction?.Invoke(registry);
         }
 
         protected override void FillAutoValueConverters(IAutoValueConverters autoValueConverters)
@@ -230,8 +202,6 @@ namespace Bindings.iOS.Binding
             //register converter for xamarin unified types
             foreach (var (key, value) in UnifiedTypesValueConverter.UnifiedTypeConversions)
                 autoValueConverters.Register(key, value, _unifiedValueTypesConverter);
-
-            _fillAutoValueConvertersAction?.Invoke(autoValueConverters);
         }
 
         protected override void FillDefaultBindingNames(IBindingNameRegistry registry)
@@ -251,8 +221,6 @@ namespace Bindings.iOS.Binding
             registry.AddOrOverwrite(typeof(UIProgressView), nameof(UIProgressView.Progress));
             registry.AddOrOverwrite(typeof(UISegmentedControl), IosPropertyBinding.UISegmentedControl_SelectedSegment);
             registry.AddOrOverwrite(typeof(UIActivityIndicatorView), IosPropertyBinding.UIActivityIndicatorView_Hidden);
-
-            _fillBindingNamesAction?.Invoke(registry);
         }
     }
 }

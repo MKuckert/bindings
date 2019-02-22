@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Bindings.Target.Construction
 {
@@ -43,7 +44,7 @@ namespace Bindings.Core.Binding.Bindings.Target.Construction
                 }
                 catch (Exception exception)
                 {
-                    BindingLog.Error(
+                    Log.Error(
                         "Problem creating target binding for {0} - exception {1}", _targetType.Name,
                         exception.ToString());
                 }

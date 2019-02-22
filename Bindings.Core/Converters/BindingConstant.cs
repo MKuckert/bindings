@@ -6,8 +6,8 @@ namespace Bindings.Core.Converters
 {
     public class BindingConstant
     {
-        public static readonly BindingConstant DoNothing = new BindingConstant("DoNothing");
-        public static readonly BindingConstant UnsetValue = new BindingConstant("UnsetValue");
+        public static readonly BindingConstant DoNothing = new BindingConstant(nameof(DoNothing));
+        public static readonly BindingConstant UnsetValue = new BindingConstant(nameof(UnsetValue));
 
         private readonly string _debug;
 

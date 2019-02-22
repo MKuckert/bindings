@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Threading;
-using Bindings.Core.Base;
 
-namespace Bindings.Core
+namespace Bindings.Core.Base
 {
-    public class MainThreadDispatcher : MainThreadAsyncDispatcher
+    public class SynchronizationContextDispatcher : MainThreadAsyncDispatcher
     {
         private readonly SynchronizationContext _synchronizationContext;
         private readonly int _mainThreadId;
 
-        public MainThreadDispatcher()
+        public SynchronizationContextDispatcher()
         {
             _synchronizationContext = SynchronizationContext.Current;
             _mainThreadId = Thread.CurrentThread.ManagedThreadId;
         }
 
-        public override bool IsOnMainThread => Thread.CurrentThread.ManagedThreadId == _mainThreadId;
-
-        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        protected override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
-            if (IsOnMainThread)
+            if (Thread.CurrentThread.ManagedThreadId == _mainThreadId)
             {
                 ExceptionMaskedAction(action, maskExceptions);
             }

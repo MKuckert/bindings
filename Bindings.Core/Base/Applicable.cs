@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Bindings.Core.Binding;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Base
 {
@@ -14,7 +14,7 @@ namespace Bindings.Core.Base
 
         ~Applicable()
         {
-            BindingLog.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
+            Log.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
         }
 
         protected void SuppressFinalizer()

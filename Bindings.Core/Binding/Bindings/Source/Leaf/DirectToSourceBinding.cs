@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Bindings.Source.Leaf
 {
@@ -17,7 +18,7 @@ namespace Bindings.Core.Binding.Bindings.Source.Leaf
 
         public override void SetValue(object value)
         {
-            BindingLog.Warning("ToSource binding is not available for direct pathed source bindings");
+            Log.Warning("ToSource binding is not available for direct pathed source bindings");
         }
 
         public override object GetValue()

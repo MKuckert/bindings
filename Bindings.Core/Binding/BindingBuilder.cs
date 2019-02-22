@@ -16,11 +16,17 @@ using Bindings.Core.Binding.Parse.PropertyPath;
 using Bindings.Core.Binding.ValueConverters;
 using Bindings.Core.Converters;
 using Bindings.Core.IoC;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding
 {
     public class BindingBuilder
     {
+        public static void Create<T>() where T : BindingBuilder, new()
+        {
+            new T().DoRegistration();
+        }
+        
         public virtual void DoRegistration()
         {
             InitializeIoC();
@@ -46,7 +52,7 @@ namespace Bindings.Core.Binding
 
         private void RegisterMainThreadDispatcher()
         {
-            IoCProvider.Instance.RegisterSingleton<IMainThreadAsyncDispatcher>(new MainThreadDispatcher());
+            IoCProvider.Instance.RegisterSingleton<IMainThreadAsyncDispatcher>(new SynchronizationContextDispatcher());
         }
 
         protected virtual void RegisterAutoValueConverters()
@@ -152,10 +158,10 @@ namespace Bindings.Core.Binding
         {
             if (IoCProvider.Instance.CanResolve<IBindingParser>())
             {
-                BindingLog.Trace("Binding Parser already registered - so skipping Default parser");
+                Log.Trace("Binding Parser already registered - so skipping Default parser");
                 return;
             }
-            BindingLog.Trace("Registering Default Binding Parser");
+            Log.Trace("Registering Default Binding Parser");
             IoCProvider.Instance.RegisterSingleton(CreateBindingParser());
         }
 
@@ -247,7 +253,7 @@ namespace Bindings.Core.Binding
                 IoCProvider.Instance.RegisterSingleton(extensionHost);
             }
             else
-                BindingLog.Trace("source binding factory extension host not provided - so no source extensions will be used");
+                Log.Trace("source binding factory extension host not provided - so no source extensions will be used");
         }
 
         protected virtual void RegisterSourceBindingFactoryExtensions(ISourceBindingFactoryExtensionHost extensionHost)

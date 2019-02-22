@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using Bindings.Core.Base;
 using Bindings.Core.Binding.Bindings;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.BindingContext
 {
@@ -71,7 +72,7 @@ namespace Bindings.Core.Binding.BindingContext
                 }
                 else
                 {
-                    BindingLog.Warning("Fluent binding description must implement {0} in order to add {1}",
+                    Log.Warning("Fluent binding description must implement {0} in order to add {1}",
                         nameof(IBaseFluentBindingDescription),
                         nameof(IBaseFluentBindingDescription.ClearBindingKey));
                 }

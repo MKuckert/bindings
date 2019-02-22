@@ -5,6 +5,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.ExpressionParse
 {
@@ -112,7 +113,7 @@ namespace Bindings.Core.Binding.ExpressionParse
             }
             catch
             {
-                BindingLog.Trace("Failed to evaluate member expression.");
+                Log.Trace("Failed to evaluate member expression.");
             }
 
             return argument;

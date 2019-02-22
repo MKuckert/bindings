@@ -5,6 +5,7 @@
 using System;
 using System.Reflection;
 using System.Windows.Input;
+using Bindings.Core.Logging;
 using Bindings.Core.WeakSubscription;
 
 namespace Bindings.Core.Binding.ValueConverters
@@ -41,7 +42,7 @@ namespace Bindings.Core.Binding.ValueConverters
                 return false;
 
             if (parameter != null)
-                BindingLog.Warning($"Non-null parameter will be ignored in {GetType().Name}.{nameof(CanExecute)}");
+                Log.Warning($"Non-null parameter will be ignored in {GetType().Name}.{nameof(CanExecute)}");
 
             return _wrapped.CanExecute(_commandParameterOverride);
         }
@@ -52,7 +53,7 @@ namespace Bindings.Core.Binding.ValueConverters
                 return;
 
             if (parameter != null)
-                BindingLog.Warning($"Non-null parameter overridden in {GetType().Name}");
+                Log.Warning($"Non-null parameter overridden in {GetType().Name}");
             _wrapped.Execute(_commandParameterOverride);
         }
 

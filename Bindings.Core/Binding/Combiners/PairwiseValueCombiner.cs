@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Bindings.Core.Binding.Bindings.SourceSteps;
 using Bindings.Core.Converters;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Combiners
 {
@@ -15,7 +16,7 @@ namespace Bindings.Core.Binding.Combiners
     {
         public override void SetValue(IEnumerable<ISourceStep> steps, object value)
         {
-            BindingLog.Trace("The Add Combiner does not support SetValue");
+            Log.Trace("The Add Combiner does not support SetValue");
         }
 
         public override Type SourceType(IEnumerable<ISourceStep> steps)
@@ -164,7 +165,7 @@ namespace Bindings.Core.Binding.Combiners
 
                 if (!_combinerActions.TryGetValue(new TypeTuple(firstType, secondType), out var combinerFunc))
                 {
-                    BindingLog.Error("Unknown type pair in Pairwise combiner {0}, {1}", firstType, secondType);
+                    Log.Error("Unknown type pair in Pairwise combiner {0}, {1}", firstType, secondType);
                     value = BindingConstant.UnsetValue;
                     return true;
                 }

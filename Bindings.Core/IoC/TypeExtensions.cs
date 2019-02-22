@@ -7,10 +7,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using Bindings.Core.Binding;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.IoC
 {
+    // TODO
     public static class TypeExtensions
     {
         public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
@@ -24,7 +25,7 @@ namespace Bindings.Core.IoC
                 // MvxLog.Instance can be null, when reflecting for Setup.cs
                 // Check for null
 
-                BindingLog.Warning("ReflectionTypeLoadException masked during loading of {0} - error {1}",
+                Log.Warning("ReflectionTypeLoadException masked during loading of {0} - error {1}",
                                       assembly.FullName, e);
 
                 if (Debugger.IsAttached)
@@ -77,7 +78,7 @@ namespace Bindings.Core.IoC
 
         public static IEnumerable<Type> Inherits(this IEnumerable<Type> types, Type baseType)
         {
-            return types.Where(x => baseType.IsAssignableFrom(x));
+            return types.Where(baseType.IsAssignableFrom);
         }
 
         public static IEnumerable<Type> Inherits<TBase>(this IEnumerable<Type> types)
@@ -123,8 +124,8 @@ namespace Bindings.Core.IoC
                 ServiceTypes = serviceTypes;
             }
 
-            public List<Type> ServiceTypes { get; private set; }
-            public Type ImplementationType { get; private set; }
+            public List<Type> ServiceTypes { get; }
+            public Type ImplementationType { get; }
         }
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsTypes(this IEnumerable<Type> types)
@@ -152,7 +153,7 @@ namespace Bindings.Core.IoC
                     types.Select(
                         t =>
                         new ServiceTypeAndImplementationTypePair(
-                            t.GetInterfaces().Where(iface => interfaces.Contains(iface)).ToList(), t));
+                            t.GetInterfaces().Where(interfaces.Contains).ToList(), t));
             }
         }
 

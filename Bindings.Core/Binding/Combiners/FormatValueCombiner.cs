@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Bindings.Core.Binding.Bindings.SourceSteps;
 using Bindings.Core.Converters;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Combiners
 {
@@ -17,7 +18,7 @@ namespace Bindings.Core.Binding.Combiners
 
             if (list.Count < 1)
             {
-                BindingLog.Warning("Format called with no parameters - will fail");
+                Log.Warning("Format called with no parameters - will fail");
                 value = BindingConstant.DoNothing;
                 return true;
             }

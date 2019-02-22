@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Reflection;
+using Bindings.Core.Logging;
 using Bindings.Core.WeakSubscription;
 
 namespace Bindings.Core.Binding.Bindings.Target
@@ -19,7 +20,7 @@ namespace Bindings.Core.Binding.Bindings.Target
         {
             if (target == null)
             {
-                BindingLog.Error($"{nameof(target)} is null in {GetType().Name}");
+                Log.Error($"{nameof(target)} is null in {GetType().Name}");
             }
         }
 
@@ -29,7 +30,7 @@ namespace Bindings.Core.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                BindingLog.Trace("Null weak reference target seen during OnValueChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
+                Log.Trace("Null weak reference target seen during OnValueChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
                 return;
             }
 
@@ -43,7 +44,7 @@ namespace Bindings.Core.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                BindingLog.Trace("Null weak reference target seen during OnPropertyChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
+                Log.Trace("Null weak reference target seen during OnPropertyChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
                 return;
             }
 
@@ -89,7 +90,7 @@ namespace Bindings.Core.Binding.Bindings.Target
 
             if (eventInfo.EventHandlerType != typeof(EventHandler))
             {
-                BindingLog.Trace("Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
+                Log.Trace("Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
                                       viewType,
                                       eventName,
                                       viewType.Name,
@@ -110,7 +111,7 @@ namespace Bindings.Core.Binding.Bindings.Target
 
             if (eventInfo.EventHandlerType != typeof(PropertyChangedEventHandler))
             {
-                BindingLog.Trace("Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
+                Log.Trace("Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
                                       viewType,
                                       eventName,
                                       viewType.Name,

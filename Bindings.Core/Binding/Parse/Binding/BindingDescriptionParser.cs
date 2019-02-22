@@ -12,6 +12,7 @@ using Bindings.Core.Binding.Parse.Binding.Lang;
 using Bindings.Core.Binding.Parse.Binding.Tibet;
 using Bindings.Core.Converters;
 using Bindings.Core.IoC;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Parse.Binding
 {
@@ -57,7 +58,7 @@ namespace Bindings.Core.Binding.Parse.Binding
 
             var toReturn = ValueConverterLookup.Find(converterName);
             if (toReturn == null)
-                BindingLog.Trace("Could not find named converter for {0}", converterName);
+                Log.Trace("Could not find named converter for {0}", converterName);
 
             return toReturn;
         }
@@ -83,7 +84,7 @@ namespace Bindings.Core.Binding.Parse.Binding
         {
             if (!parser.TryParseBindingSpecification(text, out var specification))
             {
-                BindingLog.Error(
+                Log.Error(
                                       "Failed to parse binding specification starting with {0}",
                                       text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
                 return null;
@@ -101,7 +102,7 @@ namespace Bindings.Core.Binding.Parse.Binding
             var parser = BindingParser;
             if (!parser.TryParseBindingDescription(text, out var description))
             {
-                BindingLog.Error(
+                Log.Error(
                                       "Failed to parse binding description starting with {0}",
                                       text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
                 return null;
@@ -175,12 +176,12 @@ namespace Bindings.Core.Binding.Parse.Binding
                     var converter = FindConverter(description.Function);
                     if (converter == null)
                     {
-                        BindingLog.Error("Failed to find combiner or converter for {0}", description.Function);
+                        Log.Error("Failed to find combiner or converter for {0}", description.Function);
                     }
 
                     if (description.Sources == null || description.Sources.Count == 0)
                     {
-                        BindingLog.Error("Value Converter {0} supplied with no source", description.Function);
+                        Log.Error("Value Converter {0} supplied with no source", description.Function);
                         return new LiteralSourceStepDescription()
                         {
                             Literal = null,
@@ -188,7 +189,7 @@ namespace Bindings.Core.Binding.Parse.Binding
                     }
                     else if (description.Sources.Count > 2)
                     {
-                        BindingLog.Error("Value Converter {0} supplied with too many parameters - {1}", description.Function, description.Sources.Count);
+                        Log.Error("Value Converter {0} supplied with too many parameters - {1}", description.Function, description.Sources.Count);
                         return new LiteralSourceStepDescription()
                         {
                             Literal = null,

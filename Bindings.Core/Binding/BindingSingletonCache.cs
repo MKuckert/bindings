@@ -10,7 +10,6 @@ using Bindings.Core.Binding.Bindings.SourceSteps;
 using Bindings.Core.Binding.Bindings.Target.Construction;
 using Bindings.Core.Binding.Combiners;
 using Bindings.Core.Binding.ExpressionParse;
-using Bindings.Core.Binding.Parse.Binding.Lang;
 using Bindings.Core.Exeptions;
 using Bindings.Core.IoC;
 
@@ -34,7 +33,6 @@ namespace Bindings.Core.Binding
         private IBindingDescriptionParser _bindingDescriptionParser;
         private ISourceBindingFactory _sourceBindingFactory;
         private ITargetBindingFactory _targetBindingFactory;
-        private ILanguageBindingParser _languageParser;
         private IPropertyExpressionParser _propertyExpressionParser;
         private IValueConverterLookup _valueConverterLookup;
         private IBindingNameLookup _defaultBindingName;
@@ -58,15 +56,6 @@ namespace Bindings.Core.Binding
             {
                 _bindingDescriptionParser = _bindingDescriptionParser ?? IoCProvider.Instance.Resolve<IBindingDescriptionParser>();
                 return _bindingDescriptionParser;
-            }
-        }
-
-        public ILanguageBindingParser LanguageParser
-        {
-            get
-            {
-                _languageParser = _languageParser ?? IoCProvider.Instance.Resolve<ILanguageBindingParser>();
-                return _languageParser;
             }
         }
 

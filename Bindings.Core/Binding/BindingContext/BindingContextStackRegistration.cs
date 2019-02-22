@@ -4,6 +4,7 @@
 
 using System;
 using Bindings.Core.IoC;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.BindingContext
 {
@@ -19,7 +20,7 @@ namespace Bindings.Core.Binding.BindingContext
 
         ~BindingContextStackRegistration()
         {
-            BindingLog.Error($"You should always Dispose of {GetType().Name}");
+            Log.Error($"You should always Dispose of {GetType().Name}");
             Dispose(false);
         }
 

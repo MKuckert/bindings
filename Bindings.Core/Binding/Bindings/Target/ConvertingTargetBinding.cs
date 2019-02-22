@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using Bindings.Core.Binding.Extensions;
+using Bindings.Core.Logging;
 
 namespace Bindings.Core.Binding.Bindings.Target
 {
@@ -24,11 +25,11 @@ namespace Bindings.Core.Binding.Bindings.Target
 
         public override void SetValue(object value)
         {
-            BindingLog.Trace("Receiving SetValue to " + (value ?? ""));
+            Log.Trace("Receiving SetValue to " + (value ?? ""));
             var target = Target;
             if (target == null)
             {
-                BindingLog.Warning("Weak Target is null in {0} - skipping set", GetType().Name);
+                Log.Warning("Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 
@@ -88,7 +89,7 @@ namespace Bindings.Core.Binding.Bindings.Target
             if (_isUpdatingTarget || _isUpdatingSource)
                 return;
 
-            BindingLog.Trace("Firing changed to " + (newValue ?? ""));
+            Log.Trace("Firing changed to " + (newValue ?? ""));
             try
             {
                 _isUpdatingSource = true;
@@ -125,7 +126,7 @@ namespace Bindings.Core.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                BindingLog.Warning("Weak Target is null in {0} - skipping set", GetType().Name);
+                Log.Warning("Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 
@@ -179,7 +180,7 @@ namespace Bindings.Core.Binding.Bindings.Target
             if (_isUpdatingTarget || _isUpdatingSource)
                 return;
 
-            BindingLog.Trace("Firing changed to " + newValue);
+            Log.Trace("Firing changed to " + newValue);
             try
             {
                 _isUpdatingSource = true;
